@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Surprise for uhh</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Pacifico&family=Satisfy&family=Indie+Flower&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #ff69b4;
+      --secondary-color: #ffc0cb;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Dancing Script', cursive;
+      background: url('img/cat-kiss.gif') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .petal1, .petal2 {
+      position: absolute;
+      top: -50px;
+      background-size: cover;
+      pointer-events: none;
+      opacity: 0.8;
+      z-index: 1;
+      animation: fall linear infinite;
+    }
+
+    .petal1 {
+      width: 15px;
+      height: 15px;
+      background-image: url('img/petal-style1.gif');
+    }
+
+    .petal2 {
+      width: 75px;
+      height: 75px;
+      background-image: url('img/petal-style2.gif');
+      opacity: 0.9;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    main.glow-border {
+      background-color: rgba(255, 255, 255, 0.65);
+      box-shadow: 0 0 20px var(--primary-color), 0 0 40px var(--secondary-color);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 400px;
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 30px 20px;
+      z-index: 2;
+    }
+
+    .main-img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 20px;
+      border: 6px solid rgba(255, 105, 180, 0.3);
+      box-shadow: 0 0 30px rgba(255, 105, 180, 0.4), inset 0 0 10px rgba(255, 182, 193, 0.5);
+      margin-bottom: 30px;
+    }
+
+    .gif-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .gif-row img {
+      width: 70px;
+      height: 70px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(255, 182, 193, 0.7);
+    }
+
+    .birthday-heading {
+      font-family: 'Pacifico', cursive;
+      font-size: 32px;
+      color: var(--primary-color);
+      text-align: center;
+      margin-bottom: 20px;
+      animation: glow 2s ease-in-out infinite alternate;
+      text-shadow: 0 0 5px white;
+    }
+
+    .birthday-wish {
+      font-family: 'Satisfy', cursive;
+      font-size: 20px;
+      text-align: center;
+      color: #ff1493;
+      margin-bottom: 30px;
+      background-color: rgba(255, 255, 255, 0.4);
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255, 105, 180, 0.4);
+    }
+
+    .tap-btn {
+      font-family: 'Indie Flower', cursive;
+      padding: 12px 26px;
+      font-size: 20px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 0 15px var(--primary-color);
+      animation: pulse 1.5s infinite;
+      text-shadow: 0 0 5px white;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px var(--primary-color); }
+      to   { text-shadow: 0 0 20px var(--secondary-color); }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      function createPetals(className, count) {
+        for (let i = 0; i < count; i++) {
+          const petal = document.createElement("div");
+          petal.classList.add(className);
+          petal.style.left = Math.random() * 100 + "vw";
+          petal.style.animationDuration = (6 + Math.random() * 5) + "s";
+          petal.style.animationDelay = Math.random() * 5 + "s";
+          document.body.appendChild(petal);
+        }
+      }
+      createPetals("petal1", 25);
+      createPetals("petal2", 20);
+    });
+  </script>
+
+  <main class="glow-border">
+    <img class="main-img" src="image" alt="name">
+
+    <div class="gif-row">
+      <img src="https://i.postimg.cc/gLjjMP7j/flowers.gif" alt="Flowers">
+      <img src="https://i.postimg.cc/WhDtgTrf/birthday-happy-birthday.gif" alt="Cake">
+      <img src="https://i.postimg.cc/xJ0czmyK/shourimajo-bubble-kittea.gif" alt="Bubble Cat">
+    </div>
+
+    <h1 class="birthday-heading">Happy Birthday</h1>
+
+    <p class="birthday-wish">
+      Wishing you a day full of joy, love, and warm hugs!<br>
+      You deserve all the sparkle in the world.
+    </p>
+
+    <button class="tap-btn" onclick="window.location.href='pm.html'">Tap to See More</button>
+  </main>
+
+</body>
+</html>

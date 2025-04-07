@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hey Chethana...</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Sacramento&family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      width: 100vw;
+      background: url('img/cat-hug.gif') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Dancing Script', cursive;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .border-glow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border: 10px solid transparent;
+      border-radius: 50px;
+      box-shadow:
+        0 0 20px #ff69b4,
+        0 0 30px #8a2be2,
+        0 0 40px #1e90ff,
+        0 0 50px #ff4500;
+      animation: glowBorder 6s ease-in-out infinite;
+      z-index: 1;
+    }
+
+    @keyframes glowBorder {
+      0%, 100% {
+        box-shadow:
+          0 0 20px #ff69b4,
+          0 0 30px #8a2be2,
+          0 0 40px #1e90ff,
+          0 0 50px #ff4500;
+      }
+      50% {
+        box-shadow:
+          0 0 40px #ff69b4,
+          0 0 60px #8a2be2,
+          0 0 70px #1e90ff,
+          0 0 80px #ff4500;
+      }
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: #fff;
+      padding: 20px;
+    }
+
+    .text-bg {
+      background: rgba(0, 0, 0, 0.25);
+      padding: 12px 20px;
+      border-radius: 20px;
+      display: inline-block;
+      backdrop-filter: blur(4px);
+      margin: 10px auto;
+      opacity: 0;
+      animation: bgFadeIn 2.5s ease-in-out forwards;
+      animation-delay: 0.5s;
+    }
+
+    .glow-text,
+    .line1,
+    .line2,
+    .line3 {
+      opacity: 0;
+      animation: fadeIn 2s ease-in-out forwards;
+      animation-delay: 1s;
+    }
+
+    .glow-text {
+      font-size: 3.2rem;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(0,0,0,0.8);
+    }
+
+    .line1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.6rem;
+      color: #fff;
+      text-shadow: 0 0 8px rgba(0,0,0,0.7);
+    }
+
+    .line2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.7rem;
+      color: #fff;
+      text-shadow: 0 0 8px rgba(0,0,0,0.7);
+    }
+
+    .line3 {
+      font-family: 'Sacramento', cursive;
+      font-size: 1.5rem;
+      color: #fff;
+      text-shadow: 0 0 6px rgba(0,0,0,0.6);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bgFadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .floating-btn {
+      font-family: 'Sacramento', cursive;
+      font-size: 1.6rem;
+      background: #ff69b4;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 30px;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(255, 105, 180, 0.6);
+      transition: transform 0.2s ease;
+      position: absolute;
+      animation: floatAround 10s ease-in-out infinite, fadeIn 2s ease-in-out forwards;
+      animation-delay: 1.5s, 1.5s;
+      opacity: 0;
+      z-index: 5;
+    }
+
+    .floating-btn:active {
+      transform: scale(0.95);
+      background: #ff1493;
+    }
+
+    @keyframes floatAround {
+      0%   { top: 10%; left: 10%; }
+      25%  { top: 20%; left: 60%; }
+      50%  { top: 70%; left: 50%; }
+      75%  { top: 60%; left: 20%; }
+      100% { top: 10%; left: 10%; }
+    }
+
+    /* Cherry Blossom Petals */
+    .petal {
+      position: fixed;
+      top: -10px;
+      width: 10px;
+      height: 10px;
+      background: radial-gradient(circle at center, pink 0%, #ffb6c1 70%);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      opacity: 0.7;
+      pointer-events: none;
+      z-index: 0;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="border-glow"></div>
+
+  <div class="content">
+    <h1 class="glow-text text-bg">Happy Birthday Chethana!</h1>
+    <p class="line1 text-bg">A little surprise made just for you...</p>
+    <p class="line2 text-bg">Tap 3 times to open your surprise</p>
+    <div class="line3 text-bg" id="counter">Taps: 0</div>
+  </div>
+
+  <a class="floating-btn" id="tapBtn">Tap to Open</a>
+
+  <!-- Petal Script -->
+  <script>
+    let tapCount = 0;
+    const counter = document.getElementById('counter');
+    const btn = document.getElementById('tapBtn');
+
+    btn.addEventListener('click', function () {
+      tapCount++;
+      counter.textContent = "Taps: " + tapCount;
+      if (tapCount >= 3) {
+        window.location.href = "surprise.html";
+      }
+    });
+
+    function createPetal() {
+      const petal = document.createElement("div");
+      petal.classList.add("petal");
+      petal.style.left = Math.random() * 100 + "vw";
+      let size = 8 + Math.random() * 6;
+      petal.style.width = petal.style.height = size + "px";
+      petal.style.animationDuration = (4 + Math.random() * 5) + "s";
+      document.body.appendChild(petal);
+
+      setTimeout(() => {
+        petal.remove();
+      }, 10000);
+    }
+
+    setInterval(createPetal, 300);
+  </script>
+
+</body>
+</html>

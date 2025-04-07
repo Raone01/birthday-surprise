@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Message</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Sacramento&family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(to bottom right, #fff0f5, #ffe4e1);
+      font-family: 'Pacifico', cursive;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 20px;
+      text-align: center;
+      overflow-y: auto; /* ✅ Scroll Fix */
+    }
+
+    .message-box {
+      background: white;
+      padding: 30px 25px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(255, 182, 193, 0.7);
+      max-width: 550px;
+      width: 100%;
+      margin-top: 40px;
+      margin-bottom: 40px;
+      opacity: 0;
+      transform: translateY(50px);
+      animation: fadeSlideIn 2s ease-out forwards 1.5s;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.6rem;
+      color: #ff69b4;
+      text-shadow: 0 0 15px #ffb6c1;
+      margin-bottom: 20px;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    .personal-msg {
+      font-family: 'Sacramento', cursive;
+      font-size: 1.6rem;
+      color: #333;
+      line-height: 1.8;
+      opacity: 0;
+      animation: revealText 3s ease-in-out forwards 3s;
+    }
+
+    .hug-gif {
+      width: 120px;
+      margin-top: 25px;
+      opacity: 0;
+      animation: fadeIn 2s ease-in-out forwards 4.5s, pulse 3s infinite 6.5s;
+    }
+
+    @keyframes fadeSlideIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #ff69b4; }
+      to { text-shadow: 0 0 20px #ff1493; }
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes revealText {
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="message-box">
+    <h1>My Message to You 💌</h1>
+    <p class="personal-msg">
+      Hey Chethana,<br><br>
+      Kabhi kabhi hum time miss kar jaate hain, par pyaar kabhi late nahi hota... 💖<br><br>
+      Tumhara birthday bhool gaya, is baat ka mujhe afsos hai...<br>
+      Lekin har pal tumhari yaadon se bhara hota hai...<br><br>
+      You're not just special, you're precious to me... 🌸<br>
+      Thank you for being you. I hope this little gesture brings a smile on your face 😊<br><br>
+      Happy Birthday, again... from someone who truly cares. 🎂🎁💐
+    </p>
+    <img class="hug-gif" src="https://media.giphy.com/media/ArLxZ4PebH2Ug/giphy.gif" alt="hug gif">
+  </div>
+</body>
+</html>
