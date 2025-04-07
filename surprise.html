@@ -26,7 +26,7 @@
       justify-content: center;
       align-items: center;
       padding: 10px;
-      overflow: hidden;
+      overflow-y: auto; /* Scroll enable */
       position: relative;
     }
 
@@ -63,14 +63,123 @@
       box-shadow: 0 0 20px var(--primary-color), 0 0 40px var(--secondary-color);
       border-radius: 20px;
       width: 100%;
-      max-width: 400px;
-      min-height: 90vh;
+      max-width: 360px; /* Reduced width */
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 30px 20px;
+      padding: 25px 18px;
       z-index: 2;
+      margin: 40px 0; /* Spacing for scroll */
+    }
+
+    .main-img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 20px;
+      border: 6px solid rgba(255, 105, 180, 0.3);
+      box-shadow: 0 0 30px rgba(255, 105, 180, 0.4), inset 0 0 10px rgba(255, 182, 193, 0.5);
+      margin-bottom: 30px;
+    }
+
+    .gif-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .gif-row img {
+      width: 70px;
+      height: 70px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(255, 182, 193, 0.7);
+    }
+
+    .birthday-heading {
+      font-family: 'Pacifico', cursive;
+      font-size: 32px;
+      color: var(--primary-color);
+      text-align: center;
+      margin-bottom: 20px;
+      animation: glow 2s ease-in-out infinite alternate;
+      text-shadow: 0 0 5px white;
+    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Surprise for uhh</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Pacifico&family=Satisfy&family=Indie+Flower&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #ff69b4;
+      --secondary-color: #ffc0cb;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Dancing Script', cursive;
+      background: url('img/cat-kiss.gif') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      overflow-y: auto; /* Scroll enable */
+      position: relative;
+    }
+
+    .petal1, .petal2 {
+      position: absolute;
+      top: -50px;
+      background-size: cover;
+      pointer-events: none;
+      opacity: 0.8;
+      z-index: 1;
+      animation: fall linear infinite;
+    }
+
+    .petal1 {
+      width: 15px;
+      height: 15px;
+      background-image: url('img/petal-style1.gif');
+    }
+
+    .petal2 {
+      width: 75px;
+      height: 75px;
+      background-image: url('img/petal-style2.gif');
+      opacity: 0.9;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    main.glow-border {
+      background-color: rgba(255, 255, 255, 0.65);
+      box-shadow: 0 0 20px var(--primary-color), 0 0 40px var(--secondary-color);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 360px; /* Reduced width */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 25px 18px;
+      z-index: 2;
+      margin: 40px 0; /* Spacing for scroll */
     }
 
     .main-img {
