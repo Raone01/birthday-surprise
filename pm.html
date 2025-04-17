@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Love Message</title>
-    <link href="https://fonts.googleapis.com/css2?family=Satisfy&family=Sacramento&family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Satisfy&family=Sacramento&family=Pacifico&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --pink-glow: rgba(255, 105, 180, 0.5);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -161,10 +165,34 @@
             }
         }
 
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 8px 0;
+            text-align: center;
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.85);
+            text-shadow: 0 0 8px var(--pink-glow);
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(3px);
+            z-index: 999;
+            animation: gentle-pulse 4s ease-in-out infinite;
+            border-top: 1px solid rgba(255, 105, 180, 0.2);
+        }
+
+        @keyframes gentle-pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
         @media (max-width: 768px) {
             h1 { font-size: 2rem; }
             .personal-msg { font-size: 1.4rem; }
             .heart { font-size: 3rem; }
+            footer { font-size: 1rem; }
         }
     </style>
 </head>
@@ -191,6 +219,8 @@
     <div class="heart-container">
         <div class="heart">💗</div>
     </div>
+
+    <footer>Made with 💖 by APRASIAN</footer>
 
     <script>
         // Floating Emojis
