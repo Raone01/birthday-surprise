@@ -60,7 +60,6 @@
       animation: glowBorder 6s ease-in-out infinite;
     }
 
-    /* Keyframe Animations */
     @keyframes fadeInBody {
       from { opacity: 0; }
       to { opacity: 1; }
@@ -194,7 +193,6 @@
       50% { transform: translateY(-10px); }
     }
 
-    /* Confetti Styles */
     .confetti {
       position: fixed;
       width: 10px;
@@ -213,6 +211,41 @@
         opacity: 0;
       }
     }
+
+    /* Updated Subtle Footer */
+    .aprasian-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 8px 0;
+      text-align: center;
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.85);
+      text-shadow: 0 0 8px var(--pink-glow);
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(3px);
+      z-index: 999;
+      animation: gentle-pulse 4s ease-in-out infinite;
+      border-top: 1px solid rgba(255, 105, 180, 0.2);
+    }
+
+    @keyframes gentle-pulse {
+      0%, 100% { opacity: 0.9; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.02); }
+    }
+
+    .aprasian-footer::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      box-shadow: 0 0 15px var(--pink-glow);
+      z-index: -1;
+    }
   </style>
 </head>
 <body>
@@ -226,6 +259,8 @@
   <p class="text-bg">Tap the button 3 times 💖</p>
   <div class="text-bg" id="counter">✨ Taps: 0 ✨</div>
   <button class="floating-btn" id="tapBtn">🎀 Open Surprise 🎀</button>
+
+  <footer class="aprasian-footer">APRASIAN</footer>
 
   <script>
     function initEffects() {
@@ -278,7 +313,6 @@
     const tapButton = document.getElementById('tapBtn');
     const bgMusic = document.getElementById('bgMusic');
 
-    // Mobile-friendly touch handler
     tapButton.addEventListener('click', handleTap);
     tapButton.addEventListener('touchstart', handleTap);
 
@@ -295,7 +329,6 @@
       if (tapCount === 3) {
         tapButton.disabled = true;
         
-        // Confetti explosion
         for (let i = 0; i < 300; i++) {
           const confetti = document.createElement('div');
           confetti.className = 'confetti';
