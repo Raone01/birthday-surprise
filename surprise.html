@@ -26,8 +26,37 @@
       justify-content: center;
       align-items: center;
       padding: 10px;
-      overflow-y: auto; /* Scroll enable */
+      overflow-y: auto;
       position: relative;
+      opacity: 0;
+      animation: fadeIn 2s ease-in forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .music-btn {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background-color: rgba(255, 255, 255, 0.7);
+      border: none;
+      border-radius: 50%;
+      font-size: 22px;
+      cursor: pointer;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0 10px #ff69b4;
+      z-index: 1000;
+    }
+
+    .music-btn:hover {
+      background-color: rgba(255, 255, 255, 0.9);
+      transform: scale(1.05);
     }
 
     .petal1, .petal2 {
@@ -63,14 +92,14 @@
       box-shadow: 0 0 20px var(--primary-color), 0 0 40px var(--secondary-color);
       border-radius: 20px;
       width: 100%;
-      max-width: 360px; /* Reduced width */
+      max-width: 360px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       padding: 25px 18px;
       z-index: 2;
-      margin: 40px 0; /* Spacing for scroll */
+      margin: 40px 0;
     }
 
     .main-img {
@@ -81,6 +110,11 @@
       border: 6px solid rgba(255, 105, 180, 0.3);
       box-shadow: 0 0 30px rgba(255, 105, 180, 0.4), inset 0 0 10px rgba(255, 182, 193, 0.5);
       margin-bottom: 30px;
+      transition: transform 0.6s ease;
+    }
+
+    .main-img:hover {
+      transform: scale(1.05);
     }
 
     .gif-row {
@@ -96,125 +130,33 @@
       height: 70px;
       border-radius: 10px;
       box-shadow: 0 0 8px rgba(255, 182, 193, 0.7);
+      transition: transform 0.4s ease;
+    }
+
+    .gif-row img:hover {
+      transform: scale(1.1);
     }
 
     .birthday-heading {
-      font-family: 'Pacifico', cursive;
-      font-size: 32px;
-      color: var(--primary-color);
-      text-align: center;
-      margin-bottom: 20px;
-      animation: glow 2s ease-in-out infinite alternate;
-      text-shadow: 0 0 5px white;
-    }
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Surprise for uhh</title>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Pacifico&family=Satisfy&family=Indie+Flower&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary-color: #ff69b4;
-      --secondary-color: #ffc0cb;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Dancing Script', cursive;
-      background: url('img/cat-kiss.gif') no-repeat center center fixed;
-      background-size: cover;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 10px;
-      overflow-y: auto; /* Scroll enable */
       position: relative;
-    }
-
-    .petal1, .petal2 {
-      position: absolute;
-      top: -50px;
-      background-size: cover;
-      pointer-events: none;
-      opacity: 0.8;
-      z-index: 1;
-      animation: fall linear infinite;
-    }
-
-    .petal1 {
-      width: 15px;
-      height: 15px;
-      background-image: url('img/petal-style1.gif');
-    }
-
-    .petal2 {
-      width: 75px;
-      height: 75px;
-      background-image: url('img/petal-style2.gif');
-      opacity: 0.9;
-    }
-
-    @keyframes fall {
-      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-    }
-
-    main.glow-border {
-      background-color: rgba(255, 255, 255, 0.65);
-      box-shadow: 0 0 20px var(--primary-color), 0 0 40px var(--secondary-color);
-      border-radius: 20px;
-      width: 100%;
-      max-width: 360px; /* Reduced width */
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 25px 18px;
-      z-index: 2;
-      margin: 40px 0; /* Spacing for scroll */
-    }
-
-    .main-img {
-      width: 200px;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 20px;
-      border: 6px solid rgba(255, 105, 180, 0.3);
-      box-shadow: 0 0 30px rgba(255, 105, 180, 0.4), inset 0 0 10px rgba(255, 182, 193, 0.5);
-      margin-bottom: 30px;
-    }
-
-    .gif-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      margin-bottom: 30px;
-    }
-
-    .gif-row img {
-      width: 70px;
-      height: 70px;
-      border-radius: 10px;
-      box-shadow: 0 0 8px rgba(255, 182, 193, 0.7);
-    }
-
-    .birthday-heading {
       font-family: 'Pacifico', cursive;
-      font-size: 32px;
-      color: var(--primary-color);
+      font-size: 38px;
+      color: #ff1493;
       text-align: center;
       margin-bottom: 20px;
-      animation: glow 2s ease-in-out infinite alternate;
-      text-shadow: 0 0 5px white;
+      animation: glow 2s ease-in-out infinite alternate, floatyText 4s ease-in-out infinite;
+      text-shadow: 0 0 10px white, 0 0 20px #ff69b4, 0 0 30px #ff69b4;
+    }
+
+    @keyframes glow {
+      0% { text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4; }
+      100% { text-shadow: 0 0 20px #ff1493, 0 0 40px #ff1493; }
+    }
+
+    @keyframes floatyText {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+      100% { transform: translateY(0px); }
     }
 
     .birthday-wish {
@@ -227,6 +169,19 @@
       padding: 10px;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(255, 105, 180, 0.4);
+      opacity: 0;
+      animation: fadeInWish 2s ease forwards, shimmer 3s infinite;
+      animation-delay: 2s;
+    }
+
+    @keyframes fadeInWish {
+      to { opacity: 1; }
+    }
+
+    @keyframes shimmer {
+      0% { text-shadow: 0 0 5px #fff; }
+      50% { text-shadow: 0 0 10px #ff69b4, 0 0 15px #ff69b4; }
+      100% { text-shadow: 0 0 5px #fff; }
     }
 
     .tap-btn {
@@ -241,11 +196,11 @@
       box-shadow: 0 0 15px var(--primary-color);
       animation: pulse 1.5s infinite;
       text-shadow: 0 0 5px white;
+      transition: transform 0.3s ease;
     }
 
-    @keyframes glow {
-      from { text-shadow: 0 0 10px var(--primary-color); }
-      to   { text-shadow: 0 0 20px var(--secondary-color); }
+    .tap-btn:hover {
+      transform: scale(1.05);
     }
 
     @keyframes pulse {
@@ -253,9 +208,95 @@
       50% { transform: scale(1.05); }
       100% { transform: scale(1); }
     }
+
+    .heading-petal {
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      background-image: url('img/petal-style1.gif');
+      background-size: cover;
+      opacity: 0.85;
+      pointer-events: none;
+    }
+
+    .petal-a { animation: floatAroundA 4s ease-in-out infinite; }
+    .petal-b { animation: floatAroundB 5s ease-in-out infinite; }
+    .petal-c { animation: floatAroundC 6s ease-in-out infinite; }
+
+    @keyframes floatAroundA {
+      0% { transform: translate(-30px, -10px); }
+      50% { transform: translate(30px, 10px); }
+      100% { transform: translate(-30px, -10px); }
+    }
+
+    @keyframes floatAroundB {
+      0% { transform: translate(20px, -20px); }
+      50% { transform: translate(-20px, 20px); }
+      100% { transform: translate(20px, -20px); }
+    }
+
+    @keyframes floatAroundC {
+      0% { transform: translate(0px, 30px); }
+      50% { transform: translate(15px, -30px); }
+      100% { transform: translate(0px, 30px); }
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 8px 0;
+      text-align: center;
+      font-family: 'Great Vibe', cursive;
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.85);
+      text-shadow: 0 0 8px var(--pink-glow);
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(3px);
+      z-index: 999;
+      animation: gentle-pulse 4s ease-in-out infinite;
+      border-top: 1px solid rgba(255, 105, 180, 0.2);
+    }
   </style>
 </head>
 <body>
+
+  <!-- 🎵 Background Music -->
+  <audio id="bg-music" autoplay muted loop>
+    <source src="audio/bd-song.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- 🔊 Music Toggle Button -->
+  <button class="music-btn" id="music-toggle">🔇</button>
+
+  <main class="glow-border">
+    <img class="main-img" src="img/aprasian.jpg" alt="APRASIAN">
+
+    <div class="gif-row">
+      <img src="https://i.postimg.cc/gLjjMP7j/flowers.gif" alt="Flowers">
+      <img src="https://i.postimg.cc/WhDtgTrf/birthday-happy-birthday.gif" alt="Cake">
+      <img src="https://i.postimg.cc/xJ0czmyK/shourimajo-bubble-kittea.gif" alt="Bubble Cat">
+    </div>
+
+    <h1 class="birthday-heading">
+      Happy Birthday
+      <span class="heading-petal petal-a"></span>
+      <span class="heading-petal petal-b"></span>
+      <span class="heading-petal petal-c"></span>
+    </h1>
+
+    <p class="birthday-wish">
+      Wishing you a day full of joy, love, and warm hugs!<br>
+      You deserve all the sparkle in the world.
+    </p>
+
+    <button class="tap-btn" onclick="playMusicAndGo()">Tap to See More</button>
+  </main>
+
+  <!-- Creator Footer -->
+  <footer>Made with 💖 by APRASIAN</footer>
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -271,27 +312,34 @@
       }
       createPetals("petal1", 25);
       createPetals("petal2", 20);
+
+      const music = document.getElementById("bg-music");
+      const toggleBtn = document.getElementById("music-toggle");
+
+      toggleBtn.addEventListener("click", () => {
+        if (music.paused) {
+          music.muted = false;
+          music.play();
+          toggleBtn.textContent = "🔊";
+        } else {
+          music.pause();
+          toggleBtn.textContent = "🔇";
+        }
+      });
     });
+
+    function playMusicAndGo() {
+      const audio = document.getElementById("bg-music");
+      audio.muted = false;
+      audio.play().then(() => {
+        setTimeout(() => {
+          window.location.href = 'pm.html';
+        }, 1000);
+      }).catch((error) => {
+        console.log("Autoplay error:", error);
+      });
+    }
   </script>
-
-  <main class="glow-border">
-    <img class="main-img" src="img/aprasian.jpg" alt="APRASIAN">
-
-    <div class="gif-row">
-      <img src="https://i.postimg.cc/gLjjMP7j/flowers.gif" alt="Flowers">
-      <img src="https://i.postimg.cc/WhDtgTrf/birthday-happy-birthday.gif" alt="Cake">
-      <img src="https://i.postimg.cc/xJ0czmyK/shourimajo-bubble-kittea.gif" alt="Bubble Cat">
-    </div>
-
-    <h1 class="birthday-heading">Happy Birthday</h1>
-
-    <p class="birthday-wish">
-      Wishing you a day full of joy, love, and warm hugs!<br>
-      You deserve all the sparkle in the world.
-    </p>
-
-    <button class="tap-btn" onclick="window.location.href='pm.html'">Tap to See More</button>
-  </main>
 
 </body>
 </html>
