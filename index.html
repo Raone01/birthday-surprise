@@ -33,14 +33,15 @@
       justify-content: center;
       opacity: 0;
       animation: fadeInBody 1s ease forwards;
+      touch-action: manipulation;
     }
 
     .border-glow {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      width: 99%;
+      height: 99%;
       pointer-events: none;
       z-index: 1;
     }
@@ -50,8 +51,8 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      width: 99%;
+      height: 99%;
       box-shadow:
         inset 0 0 20px var(--pink-glow),
         inset 0 0 20px var(--purple-glow),
@@ -108,6 +109,7 @@
       bottom: -150px;
       border-radius: 50% 50% 45% 45%;
       animation: floatRandom 10s linear infinite;
+      will-change: transform, opacity;
     }
 
     @keyframes floatRandom {
@@ -156,6 +158,7 @@
       transform: rotate(45deg);
       opacity: 0.8;
       animation: blossomFall 8s linear infinite;
+      will-change: transform;
     }
 
     @keyframes blossomFall {
@@ -169,6 +172,7 @@
       height: 8px;
       background: radial-gradient(circle, var(--pink-glow) 20%, rgba(255,255,255,0.8) 70%);
       animation: sparkleFade 2s infinite;
+      will-change: opacity;
     }
 
     .floating-btn {
@@ -182,6 +186,7 @@
       border-radius: 12px;
       cursor: pointer;
       transition: transform 0.3s ease;
+      touch-action: manipulation;
     }
 
     .click-animation {
@@ -199,6 +204,7 @@
       height: 10px;
       animation: confettiFall 2s linear forwards;
       z-index: 999;
+      will-change: transform;
     }
 
     @keyframes confettiFall {
@@ -212,7 +218,6 @@
       }
     }
 
-    /* Updated Subtle Footer */
     .aprasian-footer {
       position: fixed;
       bottom: 0;
@@ -220,7 +225,7 @@
       width: 100%;
       padding: 8px 0;
       text-align: center;
-      font-family: 'Great Vibes', cursive;
+      font-family: 'Great Vibe', cursive;
       font-size: 1.1rem;
       color: rgba(255, 255, 255, 0.85);
       text-shadow: 0 0 8px var(--pink-glow);
@@ -234,17 +239,6 @@
     @keyframes gentle-pulse {
       0%, 100% { opacity: 0.9; transform: scale(1); }
       50% { opacity: 1; transform: scale(1.02); }
-    }
-
-    .aprasian-footer::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      box-shadow: 0 0 15px var(--pink-glow);
-      z-index: -1;
     }
   </style>
 </head>
@@ -260,12 +254,89 @@
   <div class="text-bg" id="counter">✨ Taps: 0 ✨</div>
   <button class="floating-btn" id="tapBtn">🎀 Open Surprise 🎀</button>
 
-  <footer class="aprasian-footer">APRASIAN</footer>
+  <footer class="aprasian-footer">Made with 💖 by APRASIAN</footer>
 
   <script>
+    // Throttle function for performance
+    const throttle = (func, limit) => {
+      let lastFunc;
+      let lastRan;
+      return function() {
+        const context = this;
+        const args = arguments;
+        if (!lastRan) {
+          func.apply(context, args);
+          lastRan = Date.now();
+        } else {
+          clearTimeout(lastFunc);
+          lastFunc = setTimeout(function() {
+            if ((Date.now() - lastRan) >= limit) {
+              func.apply(context, args);
+              lastRan = Date.now();
+            }
+          }, limit - (Date.now() - lastRan));
+        }
+      }
+    };
+
+    let tapCount = 0;
+    let isProcessing = false;
+    const tapButton = document.getElementById('tapBtn');
+    const bgMusic = document.getElementById('bgMusic');
+
+    const handleInteraction = throttle((e) => {
+      if (e.cancelable) e.preventDefault();
+      if (isProcessing) return;
+
+      isProcessing = true;
+      tapCount++;
+      document.getElementById('counter').textContent = `✨ Taps: ${tapCount} ✨`;
+
+      tapButton.classList.add('click-animation');
+      setTimeout(() => {
+        tapButton.classList.remove('click-animation');
+        isProcessing = false;
+      }, 300);
+
+      if (tapCount === 1) {
+        bgMusic.play().catch(() => {
+          // Show manual play button if needed
+        });
+      }
+
+      if (tapCount >= 3) {
+        tapButton.disabled = true;
+        triggerConfetti();
+        setTimeout(() => {
+          window.location.href = 'surprise.html';
+        }, 3500);
+      }
+    }, 300);
+
+    // Event listeners
+    tapButton.addEventListener('click', handleInteraction, { passive: false });
+    tapButton.addEventListener('touchstart', handleInteraction, { passive: false });
+
+    function triggerConfetti() {
+      const confettiCount = Math.min(150, window.innerWidth / 4);
+      for (let i = 0; i < confettiCount; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.cssText = `
+          background: hsl(${Math.random() * 360}, 100%, 70%);
+          left: ${Math.random() * 100}vw;
+          animation-duration: ${2 + Math.random() * 3}s;
+        `;
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 5000);
+      }
+    }
+
     function initEffects() {
+      const balloonCount = window.innerWidth < 768 ? 4 : 8;
       const balloonColors = ['#ffb6c1', '#dda0dd', '#add8e6', '#ffffff'];
-      for (let i = 0; i < 8; i++) {
+
+      for (let i = 0; i < balloonCount; i++) {
         const balloon = document.createElement('div');
         balloon.className = 'balloon';
         const dx = (Math.random() * 100 - 50).toFixed(2);
@@ -283,7 +354,12 @@
         document.querySelector('.balloons').appendChild(balloon);
       }
 
-      function createBlossom() {
+      const particleIntervals = {
+        blossom: window.innerWidth < 768 ? 500 : 300,
+        sparkle: window.innerWidth < 768 ? 300 : 150
+      };
+
+      setInterval(() => {
         const blossom = document.createElement('div');
         blossom.className = 'petal';
         blossom.style.cssText = `
@@ -293,10 +369,9 @@
         `;
         document.body.appendChild(blossom);
         setTimeout(() => blossom.remove(), 8000);
-      }
-      setInterval(createBlossom, 300);
+      }, particleIntervals.blossom);
 
-      function addSparkle() {
+      setInterval(() => {
         const sparkle = document.createElement('div');
         sparkle.className = 'sparkle';
         sparkle.style.cssText = `
@@ -305,49 +380,26 @@
         `;
         document.body.appendChild(sparkle);
         setTimeout(() => sparkle.remove(), 2000);
-      }
-      setInterval(addSparkle, 150);
+      }, particleIntervals.sparkle);
     }
 
-    let tapCount = 0;
-    const tapButton = document.getElementById('tapBtn');
-    const bgMusic = document.getElementById('bgMusic');
-
-    tapButton.addEventListener('click', handleTap);
-    tapButton.addEventListener('touchstart', handleTap);
-
-    function handleTap() {
-      tapButton.classList.add('click-animation');
-      setTimeout(() => tapButton.classList.remove('click-animation'), 300);
-
-      if (tapCount === 0) {
-        bgMusic.play().catch(error => console.log('Audio play failed:', error));
+    // Audio context handling
+    document.body.addEventListener('touchstart', () => {
+      if (bgMusic.paused) {
+        bgMusic.play().catch(() => {});
       }
+    }, { once: true });
 
-      document.getElementById('counter').textContent = `✨ Taps: ${++tapCount} ✨`;
-
-      if (tapCount === 3) {
-        tapButton.disabled = true;
-        
-        for (let i = 0; i < 300; i++) {
-          const confetti = document.createElement('div');
-          confetti.className = 'confetti';
-          confetti.style.cssText = `
-            background: hsl(${Math.random() * 360}, 100%, 70%);
-            left: ${Math.random() * 100}vw;
-            animation-duration: ${2 + Math.random() * 3}s;
-          `;
-          document.body.appendChild(confetti);
-          setTimeout(() => confetti.remove(), 5000);
-        }
-
-        setTimeout(() => {
-          window.location.href = 'surprise.html';
-        }, 3500);
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        bgMusic.pause();
+      } else if (tapCount > 0) {
+        bgMusic.play();
       }
-    }
+    });
 
     window.addEventListener('load', () => {
+      bgMusic.load();
       initEffects();
       document.body.style.opacity = 1;
     });
